@@ -1,0 +1,35 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 20
+    buildToolsVersion '20.0.0'
+    defaultConfig {
+        applicationId 'pennapps.air.guitar.airguitar'
+        minSdkVersion 19
+        targetSdkVersion 20
+        versionCode 4
+        versionName '1.0.3'
+    }
+    buildTypes {
+        release {
+            runProguard false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    dependencies {
+        repositories {
+            maven {
+                url '/home/tika/myo-android-sdk-0.8.0/myorepository'
+//                url '/Users/utkarshgagrg/Desktop/myo-android-sdk-0.6.0/myorepository'
+            }
+        }
+
+        compile('com.thalmic:myosdk:0.8.+@aar')
+    }
+    productFlavors {
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+}

@@ -1,0 +1,118 @@
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/appdefaultnochords"
+    android:orientation="vertical"
+    tools:context=".MyActivity">
+
+    <TableRow
+        android:layout_width="fill_parent"
+        android:layout_height="40dp">
+
+        <!--<TableRow>-->
+
+            <!--<Button-->
+                <!--android:id="@+id/startBtn"-->
+                <!--android:layout_marginTop="7dp"-->
+                <!--android:layout_marginBottom="4dp"-->
+                <!--android:layout_marginLeft="4dp"-->
+                <!--android:layout_gravity="center"-->
+                <!--android:layout_width="140dp"-->
+                <!--android:layout_height="20dp"-->
+                <!--android:background="@drawable/startrecording"-->
+                <!--android:onClick="onStartClick" />-->
+        <!--</TableRow>-->
+
+        <!--<TableRow>-->
+            <!--<Button-->
+                <!--android:id="@+id/stopBtn"-->
+                <!--android:layout_marginTop="7dp"-->
+                <!--android:layout_marginBottom="4dp"-->
+                <!--android:layout_marginLeft="4dp"-->
+                <!--android:layout_gravity="center"-->
+                <!--android:layout_width="140dp"-->
+                <!--android:layout_height="20dp"-->
+                <!--android:background="@drawable/stoprecording"-->
+                <!--android:onClick="onStopClick" />-->
+        <!--</TableRow>-->
+
+        <!--<TableRow>-->
+            <!--<Button-->
+                <!--android:id="@+id/playLoopBtn"-->
+                <!--android:layout_marginTop="7dp"-->
+                <!--android:layout_marginBottom="4dp"-->
+                <!--android:layout_marginLeft="-2dp"-->
+                <!--android:layout_gravity="center"-->
+                <!--android:layout_width="140dp"-->
+                <!--android:layout_height="20dp"-->
+                <!--android:onClick="onPlayLoopClick"-->
+                <!--android:background="@drawable/playloop" />-->
+        <!--</TableRow>-->
+
+        <TableRow>
+            <TextView
+                android:id="@+id/fillerView"
+                android:layout_marginTop="7dp"
+                android:layout_marginBottom="4dp"
+                android:layout_marginLeft="-3dp"
+                android:layout_gravity="center"
+                android:layout_width="fill_parent"
+                android:layout_height="20dp"
+                android:visibility="invisible"
+                android:onClick="onStopLoopClick"
+                />
+
+            <!--<Button-->
+                <!--android:id="@+id/stopLoopBtn"-->
+                <!--android:layout_marginTop="7dp"-->
+                <!--android:layout_marginBottom="4dp"-->
+                <!--android:layout_marginLeft="-3dp"-->
+                <!--android:layout_gravity="center"-->
+                <!--android:layout_width="140dp"-->
+                <!--android:layout_height="20dp"-->
+                <!--android:onClick="onStopLoopClick"-->
+                <!--android:background="@drawable/stoploop" />-->
+        </TableRow>
+    </TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/chordC"
+            android:layout_width="150dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.0"
+            android:background="@drawable/unpressedredchord"
+            android:text="C" />
+
+        <Button
+            android:id="@+id/chordG"
+            android:layout_width="150dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.0"
+            android:background="@drawable/unpressedbluechord"
+            android:text="G" />
+
+        <Button
+            android:id="@+id/chordEm"
+            android:layout_width="150dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.0"
+            android:background="@drawable/unpressedgreenchord"
+            android:text="Em" />
+
+        <Button
+            android:id="@+id/chordD"
+            android:layout_width="150dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.0"
+            android:background="@drawable/unpressedyellowchord"
+            android:text="D" />
+
+
+    </TableRow>
+</TableLayout>

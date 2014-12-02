@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<pre-dex-items>
+
+    <item
+        dex="/home/tika/Air-Guitar-master/app/build/intermediates/pre-dexed/release/native-libs-8e827b80a1128d1515a467523551374fc04db493.jar"
+        jar="/home/tika/Air-Guitar-master/app/build/intermediates/exploded-aar/com.thalmic/myosdk/0.8.0/libs/native-libs.jar"
+        jumboMode="false"
+        revision="20.0.0"
+        sha1="5277fbf71845211b74aa6cee11b7c93c9e43d753"/>
+    <item
+        dex="/home/tika/Air-Guitar-master/app/build/intermediates/pre-dexed/release/classes-632aebe3986b514c483c15eb489721e6fe7eb814.jar"
+        jar="/home/tika/Air-Guitar-master/app/build/intermediates/exploded-aar/com.thalmic/myosdk/0.8.0/classes.jar"
+        jumboMode="false"
+        revision="20.0.0"
+        sha1="2cfb0dc0885ffdf6bba14fa8854c6448dbab38b6"/>
+
+</pre-dex-items>
