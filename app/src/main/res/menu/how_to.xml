@@ -1,4 +1,4 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="pennapps.air.guitar.AirGuitarActivity" >
+    tools:context="pennapps.air.guitar.airguitar.HowToActivity" >
 </menu>

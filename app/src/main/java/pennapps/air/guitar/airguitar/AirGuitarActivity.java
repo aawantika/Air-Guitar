@@ -565,6 +565,9 @@ public class AirGuitarActivity extends Activity {
         if (R.id.action_scan == id) {
             onScanActionSelected();
             return true;
+        } else if (R.id.action_settings == id) {
+            onHowToActionSelected();
+            return true;
         }
         return super.onOptionsItemSelected(item);
     }
@@ -572,6 +575,12 @@ public class AirGuitarActivity extends Activity {
     private void onScanActionSelected() {
         // Launch the ScanActivity to scan for Myos to connect to.
         Intent intent = new Intent(this, ScanActivity.class);
+        startActivity(intent);
+    }
+
+    private void onHowToActionSelected() {
+        // Launch the ScanActivity to scan for Myos to connect to.
+        Intent intent = new Intent(this, HowToActivity.class);
         startActivity(intent);
     }
 }

@@ -2,79 +2,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/appdefaultnochords"
+    android:background="@drawable/appblankmenunochords"
     android:orientation="vertical"
     tools:context=".MyActivity">
-
-    <TableRow
-        android:layout_width="fill_parent"
-        android:layout_height="40dp">
-
-        <!--<TableRow>-->
-
-            <!--<Button-->
-                <!--android:id="@+id/startBtn"-->
-                <!--android:layout_marginTop="7dp"-->
-                <!--android:layout_marginBottom="4dp"-->
-                <!--android:layout_marginLeft="4dp"-->
-                <!--android:layout_gravity="center"-->
-                <!--android:layout_width="140dp"-->
-                <!--android:layout_height="20dp"-->
-                <!--android:background="@drawable/startrecording"-->
-                <!--android:onClick="onStartClick" />-->
-        <!--</TableRow>-->
-
-        <!--<TableRow>-->
-            <!--<Button-->
-                <!--android:id="@+id/stopBtn"-->
-                <!--android:layout_marginTop="7dp"-->
-                <!--android:layout_marginBottom="4dp"-->
-                <!--android:layout_marginLeft="4dp"-->
-                <!--android:layout_gravity="center"-->
-                <!--android:layout_width="140dp"-->
-                <!--android:layout_height="20dp"-->
-                <!--android:background="@drawable/stoprecording"-->
-                <!--android:onClick="onStopClick" />-->
-        <!--</TableRow>-->
-
-        <!--<TableRow>-->
-            <!--<Button-->
-                <!--android:id="@+id/playLoopBtn"-->
-                <!--android:layout_marginTop="7dp"-->
-                <!--android:layout_marginBottom="4dp"-->
-                <!--android:layout_marginLeft="-2dp"-->
-                <!--android:layout_gravity="center"-->
-                <!--android:layout_width="140dp"-->
-                <!--android:layout_height="20dp"-->
-                <!--android:onClick="onPlayLoopClick"-->
-                <!--android:background="@drawable/playloop" />-->
-        <!--</TableRow>-->
-
-        <TableRow>
-            <TextView
-                android:id="@+id/fillerView"
-                android:layout_marginTop="7dp"
-                android:layout_marginBottom="4dp"
-                android:layout_marginLeft="-3dp"
-                android:layout_gravity="center"
-                android:layout_width="fill_parent"
-                android:layout_height="20dp"
-                android:visibility="invisible"
-                android:onClick="onStopLoopClick"
-                />
-
-            <!--<Button-->
-                <!--android:id="@+id/stopLoopBtn"-->
-                <!--android:layout_marginTop="7dp"-->
-                <!--android:layout_marginBottom="4dp"-->
-                <!--android:layout_marginLeft="-3dp"-->
-                <!--android:layout_gravity="center"-->
-                <!--android:layout_width="140dp"-->
-                <!--android:layout_height="20dp"-->
-                <!--android:onClick="onStopLoopClick"-->
-                <!--android:background="@drawable/stoploop" />-->
-        </TableRow>
-    </TableRow>
 
     <TableRow
         android:layout_width="match_parent"
