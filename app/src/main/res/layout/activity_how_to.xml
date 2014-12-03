@@ -1,19 +1,19 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
     android:background="@drawable/guide"
     android:orientation="vertical"
     tools:context="pennapps.air.guitar.airguitar.HowToActivity">
 
     <Button
         android:id="@+id/howToButton"
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="70dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
         android:layout_marginBottom="60dp"
-        android:background="@drawable/syncodemayo"
+        android:background="@drawable/startjamming"
         android:onClick="onHowToClick" />
 
 </RelativeLayout>
