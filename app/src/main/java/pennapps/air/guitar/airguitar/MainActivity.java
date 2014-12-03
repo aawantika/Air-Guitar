@@ -18,7 +18,7 @@ public class MainActivity extends Activity {
     }
 
     public void onGetStartedClick(View view){
-        Intent intent = new Intent(this, AirGuitarActivity.class);
+        Intent intent = new Intent(this, SyncoDeMyo.class);
         startActivity(intent);
     }
 }

@@ -30,7 +30,7 @@ import static android.view.View.OnTouchListener;
 
 public class AirGuitarActivity extends Activity {
 
-    private Button chordG, chordC, chordD, chordEm;
+    private Button chordOne, chordTwo, chordThree, chordFour;
     private MediaPlayer successPlayer;
     private boolean strumG = false;
     private boolean strumC = false;
@@ -215,71 +215,74 @@ public class AirGuitarActivity extends Activity {
             return;
         }
 
-        chordG = (Button) findViewById(R.id.chordG);
-        chordG.setOnTouchListener(new OnTouchListener() {
+        chordTwo = (Button) findViewById(R.id.chordTwo);
+        chordTwo.setText("G");
+        chordTwo.setOnTouchListener(new OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                chordG.setBackgroundResource(R.drawable.bluechord);
+                chordTwo.setBackgroundResource(R.drawable.bluechord);
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
                     strumG = true;
                     return strumG;
                 }
                 else if (event.getAction() == MotionEvent.ACTION_UP) {
                     strumG = false;
-                    chordG.setBackgroundResource(R.drawable.unpressedbluechord);
+                    chordTwo.setBackgroundResource(R.drawable.unpressedbluechord);
                     return false;
                 }
                 return false;
             }
         });
 
-        chordC = (Button) findViewById(R.id.chordC);
-        chordC.setOnTouchListener(new OnTouchListener() {
+        chordOne = (Button) findViewById(R.id.chordOne);
+        chordOne.setText("C");
+        chordOne.setOnTouchListener(new OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                chordC.setBackgroundResource(R.drawable.redchord);
+                chordOne.setBackgroundResource(R.drawable.redchord);
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
                     strumC = true;
                     return strumC;
                 }
                 else if (event.getAction() == MotionEvent.ACTION_UP) {
                     strumC = false;
-                    chordC.setBackgroundResource(R.drawable.unpressedredchord);
+                    chordOne.setBackgroundResource(R.drawable.unpressedredchord);
                     return false;
                 }
                 return false;
             }
         });
 
-        chordD = (Button) findViewById(R.id.chordD);
-        chordD.setOnTouchListener(new OnTouchListener() {
+        chordFour = (Button) findViewById(R.id.chordFour);
+        chordFour.setOnTouchListener(new OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                chordD.setBackgroundResource(R.drawable.yellowchord);
+                chordFour.setBackgroundResource(R.drawable.yellowchord);
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
                     strumD = true;
                     return strumD;
                 }
                 else if (event.getAction() == MotionEvent.ACTION_UP) {
                     strumD = false;
-                    chordD.setBackgroundResource(R.drawable.unpressedyellowchord);
+                    chordFour.setBackgroundResource(R.drawable.unpressedyellowchord);
                     return false;
                 }
                 return false;
             }
         });
 
-        chordEm = (Button) findViewById(R.id.chordEm);
-        chordEm.setOnTouchListener(new OnTouchListener() {
+        chordThree = (Button) findViewById(R.id.chordThree);
+        chordThree.setText("Em");
+        chordThree.setOnTouchListener(new OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                chordEm.setBackgroundResource(R.drawable.greenchord);
+                chordThree.setBackgroundResource(R.drawable.greenchord);
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
                     strumEm = true;
                     return strumEm;
                 } else if (event.getAction() == MotionEvent.ACTION_UP) {
                     strumEm = false;
-                    chordEm.setBackgroundResource(R.drawable.unpressedgreenchord);
+                    chordThree.setBackgroundResource(R.drawable.unpressedgreenchord);
                     return false;
                 }
                 return false;

@@ -82,36 +82,36 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/chordC"
+            android:id="@+id/chordOne"
             android:layout_width="150dp"
             android:layout_height="match_parent"
             android:layout_weight="1.0"
             android:background="@drawable/unpressedredchord"
-            android:text="C" />
+            android:text="" />
 
         <Button
-            android:id="@+id/chordG"
+            android:id="@+id/chordTwo"
             android:layout_width="150dp"
             android:layout_height="match_parent"
             android:layout_weight="1.0"
             android:background="@drawable/unpressedbluechord"
-            android:text="G" />
+            android:text="" />
 
         <Button
-            android:id="@+id/chordEm"
+            android:id="@+id/chordThree"
             android:layout_width="150dp"
             android:layout_height="match_parent"
             android:layout_weight="1.0"
             android:background="@drawable/unpressedgreenchord"
-            android:text="Em" />
+            android:text="" />
 
         <Button
-            android:id="@+id/chordD"
+            android:id="@+id/chordFour"
             android:layout_width="150dp"
             android:layout_height="match_parent"
             android:layout_weight="1.0"
             android:background="@drawable/unpressedyellowchord"
-            android:text="D" />
+            android:text="@string/d_chord" />
 
 
     </TableRow>
