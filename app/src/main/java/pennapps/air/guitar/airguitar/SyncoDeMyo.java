@@ -19,8 +19,7 @@ public class SyncoDeMyo extends Activity {
     }
 
     public void onSyncoClick(View view) {
-        System.gc();
-        Intent intent = new Intent(this, AirGuitarActivity.class);
+        Intent intent = new Intent(this, HowToActivity.class);
         startActivity(intent);
         finish();
     }
