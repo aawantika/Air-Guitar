@@ -36,7 +36,8 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".HowToActivity"
-            android:label="@string/title_activity_how_to" >
+            android:label="@string/title_activity_how_to"
+            android:screenOrientation="portrait">
         </activity>
     </application>
 

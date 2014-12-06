@@ -5,10 +5,10 @@ android {
     buildToolsVersion '20.0.0'
     defaultConfig {
         applicationId 'pennapps.air.guitar.airguitar'
-        minSdkVersion 19
+        minSdkVersion 18
         targetSdkVersion 20
-        versionCode 4
-        versionName '1.0.3'
+        versionCode 5
+        versionName '1.0.4'
     }
     buildTypes {
         release {
@@ -19,12 +19,12 @@ android {
     dependencies {
         repositories {
             maven {
-                url '/home/tika/myo-android-sdk-0.8.0/myorepository'
+                url '/home/tika/myo-android-sdk-0.9.0/myorepository'
 //                url '/Users/utkarshgagrg/Desktop/myo-android-sdk-0.6.0/myorepository'
             }
         }
 
-        compile('com.thalmic:myosdk:0.8.+@aar')
+        compile('com.thalmic:myosdk:0.9.+@aar')
     }
     productFlavors {
     }

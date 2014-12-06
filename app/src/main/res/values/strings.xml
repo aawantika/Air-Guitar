@@ -2,14 +2,14 @@
 <resources>
 
     <!-- Activity Names -->
-    <string name="app_name">Air_Guitar_BETA</string>
+    <string name="app_name">Air Guitar</string>
     <string name="title_activity_main">Air Guitar</string>
     <string name="title_activity_air_guitar">Air Guitar</string>
     <string name="title_activity_synco_de_myo">Synco De Myo</string>
-    <string name="title_activity_how_to">How To</string>
+    <string name="title_activity_how_to">How-to Guide</string>
 
     <!-- Menu Options -->
-    <string name="action_howto">How To</string>
+    <string name="action_howto">How-to Guide</string>
     <string name="scan">Scan</string>
 
     <!-- Gestures -->
