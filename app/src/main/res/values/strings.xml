@@ -34,4 +34,10 @@
     <!-- <string name="startRecording">Start Recording</string> -->
     <!-- <string name="stopRecording">Stop Recording</string> -->
     <!-- <string name="playRecording">Play Loop</string> -->
+    <string name="title_activity_key">KeyActivity</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_chords">ChordsActivity</string>
+    <string name="title_activity_keys">KeysActivity</string>
+
 </resources>

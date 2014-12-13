@@ -555,7 +555,7 @@ public class AirGuitarActivity extends Activity {
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.my, menu);
+        inflater.inflate(R.menu.airguitar, menu);
         return true;
     }
 
