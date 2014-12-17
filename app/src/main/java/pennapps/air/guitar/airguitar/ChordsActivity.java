@@ -61,7 +61,7 @@ public class ChordsActivity extends Activity {
                 if (!finalChords.equals("")) {
                     finalChords = finalChords.substring(2);
                 }
-                chordsButton.setTextSize(23);
+                chordsButton.setTextSize(22);
                 chordsButton.setText(finalChords);
             }
         });
