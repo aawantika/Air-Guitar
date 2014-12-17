@@ -1,68 +1,48 @@
 package pennapps.air.guitar.airguitar;
 
 import android.app.Activity;
-import android.app.ListActivity;
+import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
+
+import java.util.Arrays;
+import java.util.List;
 
 
-public class KeysActivity extends ListActivity {
+public class KeysActivity extends Activity {
 
-    static final String[] FRUITS = new String[] { "Apple", "Avocado", "Banana",
-            "Blueberry", "Coconut", "Durian", "Guava", "Kiwifruit",
-            "Jackfruit", "Mango", "Olive", "Pear", "Sugar-apple" };
-
+    private List<String> keys = Arrays.asList("\nG\n", "\nC\n", "");
+    private ItemAdapter keysAdapter;
+    private ListView keysList;
+    private String itemSelected;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_keys);
+        setContentView(R.layout.activity_keys);
 
-        // no more this
-        // setContentView(R.layout.list_fruit);
+        keysList = (ListView) findViewById(R.id.keysList);
+        keysAdapter = new ItemAdapter(this, R.layout.keys_row, keys);
+        keysList.setAdapter(keysAdapter);
+        keysAdapter.notifyDataSetChanged();
 
-        setListAdapter(new ArrayAdapter<String>(this, R.layout.activity_keys,
-                FRUITS));
+        keysList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
-        ListView listView = getListView();
-        listView.setTextFilterEnabled(true);
-
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            public void onItemClick(AdapterView<?> parent, View view,
-                                    int position, long id) {
-                // When clicked, show a toast with the TextView text
-                Toast.makeText(getApplicationContext(),
-                        ((TextView) view).getText(), Toast.LENGTH_SHORT).show();
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                int itemPosition = position;
+                if (position != keysList.getCount() - 1) {
+                    view.setSelected(true);
+                    itemSelected = keys.get(position);
+                }
             }
         });
     }
 
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_keys, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
+    public void onNextClick(View view){
+        Intent intent = new Intent(this, ChordsActivity.class);
+        intent.putExtra("key",itemSelected);
+        startActivity(intent);
     }
 }

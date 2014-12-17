@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="pressed_color">#66ffc11c</color>
+    <color name="default_color">#00000000</color>
+    <color name="warning_color">#00000000</color>
+</resources>

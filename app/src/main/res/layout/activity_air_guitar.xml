@@ -1,43 +1,42 @@
 <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
     android:background="@drawable/appblankmenunochords"
     android:orientation="vertical"
     tools:context=".MyActivity">
 
     <TableRow
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/chordOne"
-            android:layout_width="150dp"
+            android:id="@+id/chordZero"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1.0"
-            android:background="@drawable/unpressedredchord"
-            android:text="" />
+            android:background="@drawable/unpressedredchord" />
 
         <Button
-            android:id="@+id/chordTwo"
-            android:layout_width="150dp"
+            android:id="@+id/chordOne"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1.0"
             android:background="@drawable/unpressedbluechord"
             android:text="" />
 
         <Button
-            android:id="@+id/chordThree"
-            android:layout_width="150dp"
+            android:id="@+id/chordTwo"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1.0"
             android:background="@drawable/unpressedgreenchord"
             android:text="" />
 
         <Button
-            android:id="@+id/chordFour"
-            android:layout_width="150dp"
+            android:id="@+id/chordThree"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1.0"
             android:background="@drawable/unpressedyellowchord"

@@ -30,13 +30,15 @@ import static android.view.View.OnTouchListener;
 
 public class AirGuitarActivity extends Activity {
 
-    private Button chordOne, chordTwo, chordThree, chordFour;
+    // chord selection
+    private Button chordZero, chordOne, chordTwo, chordThree;
     private MediaPlayer successPlayer;
-    private boolean strumG = false;
-    private boolean strumC = false;
-    private boolean strumD = false;
-    private boolean strumEm = false;
-    private int intensity = 0;
+    private boolean strumChordZero, strumChordOne, strumChordTwo, strumChordThree = false;
+    private String chords;
+    private String[] finalChords;
+    private String key;
+
+    // used for strumming
     private float originalPitch = 0;
     private float newPitch = 0;
     private String direction = "up";
@@ -44,13 +46,6 @@ public class AirGuitarActivity extends Activity {
     private Vector3 gravity = new Vector3();
     private Vector3 acceleration = new Vector3();
     private double rawIntensity = 0.0;
-
-//    private Button startBtn, stopBtn, loopBtn, stopLoopBtn;
-//    private MediaRecorder myRecorder;
-////    private MediaPlayer myPlayer;
-//    private String outputFile = null;
-
-    private View appView;
 
 
     // This code will be returned in onActivityResult() when the enable Bluetooth activity exits.
@@ -75,7 +70,7 @@ public class AirGuitarActivity extends Activity {
         @Override
         public void onDisconnect(Myo myo, long timestamp) {
             // Set the text color of the text view to red when a Myo disconnects.
-            Log.i("NOTNOT Connected!", "NOT CONNECTED");
+            Log.i("NOT Connected!", "NOT CONNECTED");
         }
 
         // onArmRecognized() is called whenever Myo has recognized a setup gesture after someone has put it on their
@@ -120,31 +115,41 @@ public class AirGuitarActivity extends Activity {
         public void checkPitch() {
             float difference = newPitch - originalPitch;
             if (Math.abs(difference) > 10) {
-                System.out.println("CHANGE");
                 originalPitch = newPitch;
-                Log.i("INTENSITY:", rawIntensity+"");
-
-                //if(rawIntensity == Double.NaN) intensity = -1;
-
-                Log.i("CHANGE: INTENSITY", intensity + "");
 
                 if (difference < 0) {
-                    // down to up
-                    String newDirection = "up";
-                    Log.i("CHANGE: UP","");
-                    if (!direction.equals(newDirection)) {
-                        direction = newDirection;
-                        strumMethod();
-                    }
-
-                } else {
                     // up to down
                     String newDirection = "down";
-                    Log.i("CHANGE: DOWN","");
+                    Log.i("CHANGE: DOWN", "");
                     if (!direction.equals(newDirection)) {
                         direction = newDirection;
-                        strumMethodUp();
-                        return ;
+                        if (strumChordZero) {
+                            playChord(finalChords[0], direction);
+                        } else if (strumChordOne) {
+                            playChord(finalChords[1], direction);
+                        } else if (strumChordTwo) {
+                            playChord(finalChords[2], direction);
+                        } else if (strumChordThree) {
+                            playChord(finalChords[3], direction);
+                        }
+                        return;
+                    }
+                } else {
+                    // down to up
+                    String newDirection = "up";
+                    Log.i("CHANGE: UP", "");
+                    if (!direction.equals(newDirection)) {
+                        direction = newDirection;
+                        if (strumChordZero) {
+                            playChord(finalChords[0], direction);
+                        } else if (strumChordOne) {
+                            playChord(finalChords[1], direction);
+                        } else if (strumChordTwo) {
+                            playChord(finalChords[2], direction);
+                        } else if (strumChordThree) {
+                            playChord(finalChords[3], direction);
+                        }
+                        return;
                     }
                 }
             }
@@ -153,9 +158,9 @@ public class AirGuitarActivity extends Activity {
         public void onAccelerometerData(Myo myo, long timestamp, Vector3 accel) {
             double alpha = 0.8;
 
-            gravity = new Vector3(alpha * gravity.x() + (1-alpha) * accel.x(),
-                    alpha * gravity.y() + (1-alpha) * accel.y(),
-                    alpha * gravity.z() + (1-alpha) * accel.z());
+            gravity = new Vector3(alpha * gravity.x() + (1 - alpha) * accel.x(),
+                    alpha * gravity.y() + (1 - alpha) * accel.y(),
+                    alpha * gravity.z() + (1 - alpha) * accel.z());
 
             acceleration = new Vector3(accel.x() - gravity.x(),
                     accel.y() - gravity.y(),
@@ -174,7 +179,7 @@ public class AirGuitarActivity extends Activity {
             // based on the pose we receive.
             switch (pose) {
                 case UNKNOWN:
-                    Log.i("UNKNOWN","");
+                    Log.i("UNKNOWN", "");
                     break;
 //                case FIST:
 //                    onStartClick(findViewById(android.R.id.content));
@@ -200,14 +205,6 @@ public class AirGuitarActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_air_guitar);
 
-//        outputFile = Environment.getExternalStorageDirectory().getAbsolutePath() + "/airGuitarRecording.3gp";
-//
-//        myRecorder = new MediaRecorder();
-//        myRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
-//        myRecorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
-//        myRecorder.setAudioEncoder(MediaRecorder.OutputFormat.AMR_NB);
-//        myRecorder.setOutputFile(outputFile);
-
         Hub hub = Hub.getInstance();
         if (!hub.init(this, getPackageName())) {
             Toast.makeText(this, "Couldn't initialize Hub", Toast.LENGTH_SHORT).show();
@@ -215,192 +212,124 @@ public class AirGuitarActivity extends Activity {
             return;
         }
 
-        chordTwo = (Button) findViewById(R.id.chordTwo);
-        chordTwo.setText("G");
-        chordTwo.setOnTouchListener(new OnTouchListener() {
+        key = getIntent().getExtras().getString("key");
+        chords = getIntent().getExtras().getString("chords");
+        finalChords = chords.split(",");
+        for (int i = 0; i < finalChords.length; i++) {
+            finalChords[i] = finalChords[i].trim();
+        }
+
+        chordZero = (Button) findViewById(R.id.chordZero);
+        chordZero.setText(finalChords[0]);
+        chordZero.setOnTouchListener(new OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                chordTwo.setBackgroundResource(R.drawable.bluechord);
+                chordZero.setBackgroundResource(R.drawable.redchord);
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                    strumG = true;
-                    return strumG;
+                    strumChordZero = true;
+                } else if (event.getAction() == MotionEvent.ACTION_UP) {
+                    strumChordZero = false;
+                    chordZero.setBackgroundResource(R.drawable.unpressedredchord);
                 }
-                else if (event.getAction() == MotionEvent.ACTION_UP) {
-                    strumG = false;
-                    chordTwo.setBackgroundResource(R.drawable.unpressedbluechord);
-                    return false;
-                }
-                return false;
+                System.out.println("CHORD: " + finalChords[0] + " dir: " + strumChordZero);
+                return strumChordZero;
             }
         });
 
         chordOne = (Button) findViewById(R.id.chordOne);
-        chordOne.setText("C");
+        chordOne.setText(finalChords[1]);
         chordOne.setOnTouchListener(new OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                chordOne.setBackgroundResource(R.drawable.redchord);
+                chordOne.setBackgroundResource(R.drawable.bluechord);
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                    strumC = true;
-                    return strumC;
+                    strumChordOne = true;
+                } else if (event.getAction() == MotionEvent.ACTION_UP) {
+                    strumChordOne = false;
+                    chordOne.setBackgroundResource(R.drawable.unpressedbluechord);
                 }
-                else if (event.getAction() == MotionEvent.ACTION_UP) {
-                    strumC = false;
-                    chordOne.setBackgroundResource(R.drawable.unpressedredchord);
-                    return false;
-                }
-                return false;
+                System.out.println("CHORD: " + finalChords[1] + " dir: " + strumChordOne);
+                return strumChordOne;
             }
         });
 
-        chordFour = (Button) findViewById(R.id.chordFour);
-        chordFour.setOnTouchListener(new OnTouchListener() {
+        chordTwo = (Button) findViewById(R.id.chordTwo);
+        chordTwo.setText(finalChords[2]);
+        chordTwo.setOnTouchListener(new OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                chordFour.setBackgroundResource(R.drawable.yellowchord);
+                chordTwo.setBackgroundResource(R.drawable.greenchord);
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                    strumD = true;
-                    return strumD;
+                    strumChordTwo = true;
+                } else if (event.getAction() == MotionEvent.ACTION_UP) {
+                    strumChordTwo = false;
+                    chordTwo.setBackgroundResource(R.drawable.unpressedgreenchord);
                 }
-                else if (event.getAction() == MotionEvent.ACTION_UP) {
-                    strumD = false;
-                    chordFour.setBackgroundResource(R.drawable.unpressedyellowchord);
-                    return false;
-                }
-                return false;
+                System.out.println("CHORD: " + finalChords[2] + " dir: " + strumChordTwo);
+                return strumChordTwo;
             }
         });
 
         chordThree = (Button) findViewById(R.id.chordThree);
-        chordThree.setText("Em");
+        chordThree.setText(finalChords[3]);
         chordThree.setOnTouchListener(new OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                chordThree.setBackgroundResource(R.drawable.greenchord);
+                chordThree.setBackgroundResource(R.drawable.yellowchord);
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                    strumEm = true;
-                    return strumEm;
+                    strumChordThree = true;
                 } else if (event.getAction() == MotionEvent.ACTION_UP) {
-                    strumEm = false;
-                    chordThree.setBackgroundResource(R.drawable.unpressedgreenchord);
-                    return false;
+                    strumChordThree = false;
+                    chordThree.setBackgroundResource(R.drawable.unpressedyellowchord);
                 }
-                return false;
+                System.out.println("CHORD: " + finalChords[3] + " dir: " + strumChordThree);
+                return strumChordThree;
             }
         });
 
         hub.addListener(mListener);
-
-//        startBtn = (Button)findViewById(R.id.startBtn);
-//        stopBtn = (Button)findViewById(R.id.stopBtn);
-//        loopBtn = (Button)findViewById(R.id.playLoopBtn);
-//        stopLoopBtn = (Button)findViewById(R.id.stopLoopBtn);
     }
 
-//    public void onStartClick(View view) {
-//        try {
-//            myRecorder.prepare();
-//            myRecorder.start();
-//
-//            startBtn.setEnabled(false);
-//            stopBtn.setEnabled(true);
-//
-//            Toast.makeText(getApplicationContext(), "Starting recording...", Toast.LENGTH_SHORT).show();
-//        } catch (IllegalStateException e) {
-//            e.printStackTrace();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//    }
-////
-////    public void onStopClick(View view) {
-//        try {
-//            myRecorder.stop();
-//            myRecorder.release();
-//            myRecorder = null;
-//
-//            stopBtn.setEnabled(false);
-//            startBtn.setEnabled(true);
-//
-//            Toast.makeText(getApplicationContext(), "Stop recording...", Toast.LENGTH_SHORT).show();
-//        } catch (IllegalStateException e) {
-//            e.printStackTrace();
-//        }
-//    }
-
-//    public void onPlayLoopClick(View view) {
-//        try {
-//            loopBtn.setBackgroundResource(R.drawable.playingloop);
-//
-//            myPlayer = new MediaPlayer();
-//            myPlayer.setDataSource(outputFile);
-//            myPlayer.prepare();
-//            myPlayer.setLooping(true);
-//            myPlayer.start();
-//
-//            loopBtn.setEnabled(false);
-//            stopLoopBtn.setEnabled(true);
-//
-//            Toast.makeText(getApplicationContext(), "Playing loop...", Toast.LENGTH_SHORT).show();
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//    }
-
-//    public void onStopLoopClick(View view) {
-//        try {
-//            if (myPlayer != null) {
-//                loopBtn.setBackgroundResource(R.drawable.playloop);
-//
-//                myPlayer.setLooping(false);
-//                myPlayer.stop();
-//                myPlayer.release();
-//                myPlayer = null;
-//                loopBtn.setEnabled(true);
-//                stopLoopBtn.setEnabled(false);
-//
-//                Toast.makeText(getApplicationContext(), "Stoping loop...", Toast.LENGTH_SHORT).show();
-//            }
-//        } catch (IllegalStateException e) {
-//            e.printStackTrace();
-//        }
-//    }
-
-    private void strumMethod(){
-
-        if (strumG) {
-            downPlayG();
-        }
-        else if (strumC) {
-            downPlayC();
-        }
-        else if (strumD) {
-            downPlayD();
-        }
-        else if (strumEm) {
-            downPlayEm();
-        }
-    }
-
-    private void strumMethodUp(){
-
-        if (strumG) {
-            upPlayG();
-        }
-        else if (strumC) {
-            upPlayC();
-        }
-        else if (strumD) {
-            upPlayD();
-        }
-        else if (strumEm) {
-            upPlayEm();
-        }
-    }
-
-    private void downPlayG() {
+    private void playChord(String chord, String chordDirection) {
         successPlayer = new MediaPlayer();
-        successPlayer = MediaPlayer.create(this, R.raw.g_down_low);
+        System.out.println("DIRECTION: " + chordDirection + " CHORD: " + chord);
+        if (chordDirection.equals("down")) {
+            if (chord.equals("A minor")) {
+                successPlayer = MediaPlayer.create(this, R.raw.am_down);
+            } else if (chord.equals("B minor")) {
+                successPlayer = MediaPlayer.create(this, R.raw.am_down);
+            } else if (chord.equals("C")) {
+                successPlayer = MediaPlayer.create(this, R.raw.c_down);
+            } else if (chord.equals("D")) {
+                successPlayer = MediaPlayer.create(this, R.raw.d_down);
+            } else if (chord.equals("D minor")) {
+                successPlayer = MediaPlayer.create(this, R.raw.dm_down);
+            } else if (chord.equals("E minor")) {
+                successPlayer = MediaPlayer.create(this, R.raw.em_down);
+            } else if (chord.equals("F")) {
+                successPlayer = MediaPlayer.create(this, R.raw.f_down);
+            } else if (chord.equals("G")) {
+                successPlayer = MediaPlayer.create(this, R.raw.g_down);
+            }
+        } else if (chordDirection.equals("up")) {
+            if (chord.equals("A minor")) {
+                successPlayer = MediaPlayer.create(this, R.raw.am_up);
+            } else if (chord.equals("B minor")) {
+                successPlayer = MediaPlayer.create(this, R.raw.am_up);
+            } else if (chord.equals("C")) {
+                successPlayer = MediaPlayer.create(this, R.raw.c_up);
+            } else if (chord.equals("D")) {
+                successPlayer = MediaPlayer.create(this, R.raw.d_up);
+            } else if (chord.equals("D minor")) {
+                successPlayer = MediaPlayer.create(this, R.raw.dm_up);
+            } else if (chord.equals("E minor")) {
+                successPlayer = MediaPlayer.create(this, R.raw.em_up);
+            } else if (chord.equals("F")) {
+                successPlayer = MediaPlayer.create(this, R.raw.f_up);
+            } else if (chord.equals("G")) {
+                successPlayer = MediaPlayer.create(this, R.raw.g_up);
+            }
+        }
         successPlayer.setLooping(false);
         successPlayer.start();
 
@@ -410,112 +339,6 @@ public class AirGuitarActivity extends Activity {
                 successPlayer.release();
             }
         });
-
-    }
-
-    private void upPlayG() {
-        successPlayer = new MediaPlayer();
-        successPlayer = MediaPlayer.create(this, R.raw.g_up_low);
-        successPlayer.setLooping(false);
-        successPlayer.start();
-
-        successPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-            @Override
-            public void onCompletion(MediaPlayer mp) {
-                successPlayer.release();
-            }
-        });
-
-    }
-
-    private void downPlayC() {
-        successPlayer = new MediaPlayer();
-        successPlayer = MediaPlayer.create(this, R.raw.c_down_low);
-        successPlayer.setLooping(false);
-        successPlayer.start();
-
-        successPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-            @Override
-            public void onCompletion(MediaPlayer mp) {
-                successPlayer.release();
-            }
-        });
-
-    }
-
-    private void upPlayC() {
-        successPlayer = new MediaPlayer();
-        successPlayer = MediaPlayer.create(this, R.raw.c_up_low);
-        successPlayer.setLooping(false);
-        successPlayer.start();
-
-        successPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-            @Override
-            public void onCompletion(MediaPlayer mp) {
-                successPlayer.release();
-            }
-        });
-
-    }
-
-    private void downPlayD() {
-        successPlayer = new MediaPlayer();
-        successPlayer = MediaPlayer.create(this, R.raw.d_down_low);
-        successPlayer.setLooping(false);
-        successPlayer.start();
-
-        successPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-            @Override
-            public void onCompletion(MediaPlayer mp) {
-                successPlayer.release();
-            }
-        });
-
-    }
-
-    private void upPlayD() {
-        successPlayer = new MediaPlayer();
-        successPlayer = MediaPlayer.create(this, R.raw.d_up_low);
-        successPlayer.setLooping(false);
-        successPlayer.start();
-
-        successPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-            @Override
-            public void onCompletion(MediaPlayer mp) {
-                successPlayer.release();
-            }
-        });
-
-    }
-
-    private void downPlayEm() {
-        successPlayer = new MediaPlayer();
-        successPlayer = MediaPlayer.create(this, R.raw.em_down_low);
-        successPlayer.setLooping(false);
-        successPlayer.start();
-
-        successPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-            @Override
-            public void onCompletion(MediaPlayer mp) {
-                successPlayer.release();
-            }
-        });
-
-    }
-
-    private void upPlayEm() {
-        successPlayer = new MediaPlayer();
-        successPlayer = MediaPlayer.create(this, R.raw.em_up_low);
-        successPlayer.setLooping(false);
-        successPlayer.start();
-
-        successPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-            @Override
-            public void onCompletion(MediaPlayer mp) {
-                successPlayer.release();
-            }
-        });
-
     }
 
     @Override
@@ -568,6 +391,12 @@ public class AirGuitarActivity extends Activity {
         } else if (R.id.action_settings == id) {
             onHowToActionSelected();
             return true;
+        } else if (R.id.action_pickKeys == id) {
+            onPickKeysSelected();
+            return true;
+        } else if (R.id.action_pickChords == id) {
+            onPickChordsSelected();
+            return true;
         }
         return super.onOptionsItemSelected(item);
     }
@@ -579,8 +408,18 @@ public class AirGuitarActivity extends Activity {
     }
 
     private void onHowToActionSelected() {
-        // Launch the ScanActivity to scan for Myos to connect to.
         Intent intent = new Intent(this, HowToActivity.class);
+        startActivity(intent);
+    }
+
+    private void onPickKeysSelected() {
+        Intent intent = new Intent(this, KeysActivity.class);
+        startActivity(intent);
+    }
+
+    private void onPickChordsSelected() {
+        Intent intent = new Intent(this, ChordsActivity.class);
+        intent.putExtra("key",key);
         startActivity(intent);
     }
 }

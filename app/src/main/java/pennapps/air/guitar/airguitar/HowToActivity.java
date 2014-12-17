@@ -37,7 +37,7 @@ public class HowToActivity extends Activity {
     }
 
     public void onHowToClick(View view){
-        Intent intent = new Intent(this, AirGuitarActivity.class);
+        Intent intent = new Intent(this, KeysActivity.class);
         startActivity(intent);
     }
 }

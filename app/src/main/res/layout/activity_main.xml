@@ -8,12 +8,22 @@
 
 
     <Button
+        android:id="@+id/getStartedBtn"
         android:layout_width="wrap_content"
         android:layout_height="70dp"
-        android:id="@+id/getStartedBtn"
+        android:layout_marginBottom="151dp"
+        android:background="@drawable/getstarted"
         android:onClick="onGetStartedClick"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:id="@+id/pickKeyBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="70dp"
         android:layout_marginBottom="60dp"
-        android:background="@drawable/getstarted"/>
+        android:background="@drawable/pickyourkey"
+        android:onClick="onPickKeyClick"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
 </RelativeLayout>
