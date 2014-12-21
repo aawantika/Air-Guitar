@@ -297,7 +297,7 @@ public class AirGuitarActivity extends Activity {
             if (chord.equals("A minor")) {
                 successPlayer = MediaPlayer.create(this, R.raw.am_down);
             } else if (chord.equals("B minor")) {
-                successPlayer = MediaPlayer.create(this, R.raw.am_down);
+                successPlayer = MediaPlayer.create(this, R.raw.bm_down);
             } else if (chord.equals("C")) {
                 successPlayer = MediaPlayer.create(this, R.raw.c_down);
             } else if (chord.equals("D")) {
@@ -315,7 +315,7 @@ public class AirGuitarActivity extends Activity {
             if (chord.equals("A minor")) {
                 successPlayer = MediaPlayer.create(this, R.raw.am_up);
             } else if (chord.equals("B minor")) {
-                successPlayer = MediaPlayer.create(this, R.raw.am_up);
+                successPlayer = MediaPlayer.create(this, R.raw.bm_up);
             } else if (chord.equals("C")) {
                 successPlayer = MediaPlayer.create(this, R.raw.c_up);
             } else if (chord.equals("D")) {
