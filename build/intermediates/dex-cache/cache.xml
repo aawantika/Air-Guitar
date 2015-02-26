@@ -2,18 +2,18 @@
 <items version="2" >
 
     <item
-        jar="/home/tika/Air-Guitar/app/build/intermediates/exploded-aar/com.thalmic/myosdk/0.9.0/classes.jar"
+        jar="/home/tika/Air-Guitar/app/build/intermediates/exploded-aar/com.thalmic/myosdk/0.10.0/classes.jar"
         jumboMode="false"
         revision="20.0.0"
-        sha1="3ee0895ac4fb8932b1cb289377821e2898e4236a">
-        <dex dex="/home/tika/Air-Guitar/app/build/intermediates/pre-dexed/debug/classes-068b57b755eeeedf24384f4886cfffbb94efe632.jar" />
+        sha1="d189db75174a41996c33bb243d2228aacf10fa53">
+        <dex dex="/home/tika/Air-Guitar/app/build/intermediates/pre-dexed/debug/classes-e943cbe2111747e5a531128bad48f9ef408198c3.jar" />
     </item>
     <item
-        jar="/home/tika/Air-Guitar/app/build/intermediates/exploded-aar/com.thalmic/myosdk/0.9.0/libs/native-libs.jar"
+        jar="/home/tika/Air-Guitar/app/build/intermediates/exploded-aar/com.thalmic/myosdk/0.10.0/libs/native-libs.jar"
         jumboMode="false"
         revision="20.0.0"
-        sha1="a4714d893b3c5e88f8c9f5341ac2d200344ad6c8">
-        <dex dex="/home/tika/Air-Guitar/app/build/intermediates/pre-dexed/debug/native-libs-cdb7843a22f75b6ab50833bbec79b13fc217f8a7.jar" />
+        sha1="d24ac9790966ffbd1bd9d921a262572c94903027">
+        <dex dex="/home/tika/Air-Guitar/app/build/intermediates/pre-dexed/debug/native-libs-7319718c354463dedb65c98954c245cbbb4608ce.jar" />
     </item>
 
 </items>

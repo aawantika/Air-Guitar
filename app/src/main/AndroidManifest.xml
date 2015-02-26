@@ -28,6 +28,7 @@
             android:name=".AirGuitarActivity"
             android:label="@string/title_activity_air_guitar"
             android:screenOrientation="landscape" />
+
         <activity
             android:name=".SyncoDeMyo"
             android:label="@string/title_activity_synco_de_myo"

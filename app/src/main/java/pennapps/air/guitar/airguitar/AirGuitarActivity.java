@@ -119,8 +119,8 @@ public class AirGuitarActivity extends Activity {
 
                 if (difference < 0) {
                     // up to down
-                    String newDirection = "down";
-                    Log.i("CHANGE: DOWN", "");
+                    String newDirection = "up";
+                    Log.i("CHANGE: UP", "");
                     if (!direction.equals(newDirection)) {
                         direction = newDirection;
                         if (strumChordZero) {
@@ -136,8 +136,8 @@ public class AirGuitarActivity extends Activity {
                     }
                 } else {
                     // down to up
-                    String newDirection = "up";
-                    Log.i("CHANGE: UP", "");
+                    String newDirection = "down";
+                    Log.i("CHANGE: DOWN", "");
                     if (!direction.equals(newDirection)) {
                         direction = newDirection;
                         if (strumChordZero) {
